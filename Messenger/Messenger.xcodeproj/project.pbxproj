@@ -72,6 +72,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		043384B1267366E9005994A5 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		049159E12665BE5B0097BECE = {
 			isa = PBXGroup;
 			children = (
@@ -98,7 +105,7 @@
 				04915A072665C0140097BECE /* Resources */,
 				04915A062665BFE70097BECE /* Model */,
 				04915A042665BFD80097BECE /* Views */,
-				04915A052665BFDE0097BECE /* ViewModels */,
+				043384B1267366E9005994A5 /* ViewModels */,
 				04915A032665BFC20097BECE /* Controllers */,
 			);
 			path = Messenger;
@@ -127,13 +134,6 @@
 				04786F66267336EC00E698E8 /* NewConversationTableViewCell.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		04915A052665BFDE0097BECE /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		04915A062665BFE70097BECE /* Model */ = {
