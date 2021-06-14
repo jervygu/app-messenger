@@ -10,6 +10,19 @@ import Firebase
 import FBSDKLoginKit
 import GoogleSignIn
 
+enum ProfileViewModelType {
+    case logout, legalPolicies, help
+}
+
+struct ProfileViewModel {
+    let viewModelType: ProfileViewModelType
+    let title: String
+    let iconName: String
+    let color: UIColor
+//    let color: UIColor
+    let handler: (() -> Void)?
+}
+
 class ProfileViewController: UIViewController {
     
     
@@ -21,7 +34,7 @@ class ProfileViewController: UIViewController {
 //    }()
     
 //    "Account settings", "Legal and policies"
-    let profileOptions = ["Log out"]
+    var profileOptions = [ProfileViewModel]()
     
 
     override func viewDidLoad() {
@@ -29,6 +42,41 @@ class ProfileViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         title = "Profile"
+        
+        tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: ProfileTableViewCell.identifier)
+        
+        profileOptions.append(
+            ProfileViewModel(viewModelType: .help,
+                             title: "Help",
+                             iconName: "questionmark.circle.fill",
+                             color: UIColor.systemBlue,
+                             handler: { [weak self] in
+                                self?.goToWebPage(urlString: "https://www.facebook.com/terms.php",
+                                            title: "Help Center")
+                             }))
+        
+        profileOptions.append(
+            ProfileViewModel(viewModelType: .legalPolicies,
+                             title: "Legal & Policies",
+                             iconName: "doc.text.fill",
+                             color: UIColor.systemGray,
+                             handler: { [weak self] in
+                                self?.goToWebPage(urlString: "https://www.facebook.com/terms.php",
+                                            title: "Legal & Policies")
+                                
+                             }))
+        
+        profileOptions.append(
+            ProfileViewModel(viewModelType: .logout,
+                             title: "Log Out",
+                             iconName: "arrow.2.circlepath.circle.fill",
+                             color: UIColor.systemRed,
+                             handler: { [weak self] in
+                                guard let strongSelf = self else {
+                                    return
+                                }
+                                strongSelf.didTapLogout()
+                             }))
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.delegate = self
@@ -38,6 +86,14 @@ class ProfileViewController: UIViewController {
         
         
 //        view.addSubview(tableView)
+    }
+    
+    func goToWebPage(urlString: String, title: String) {
+        let vc = WebViewController()
+        vc.webPageUrl = urlString
+        vc.title = title
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func createTableHeader() -> UIView? {
@@ -87,33 +143,18 @@ class ProfileViewController: UIViewController {
         headerView.addSubview(imageView)
         headerView.addSubview(label)
         
-        StorageManager.shared.getDownloadURL(forPath: path, completion: { [weak self] result in
+        StorageManager.shared.getDownloadURL(forPath: path, completion: { result in
             // [weak self] - to avoid retain cycle to the memory
             
             switch result {
             case .success(let url):
-                self?.downloadImage(withImageView: imageView, withUrl: url)
+                imageView.sd_setImage(with: url, completed: nil)
             case .failure(let error):
                 print("Failed to get download url: \(error)")
             }
         })
         
         return headerView
-    }
-    
-    func downloadImage(withImageView imageView: UIImageView, withUrl url: URL) {
-        let task = URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
-            guard let data = data, error == nil else {
-                return
-            }
-            
-            DispatchQueue.main.async {
-                // because anything UI related should occur on the main thread
-                let image = UIImage(data: data)
-                imageView.image = image
-            }
-        })
-        task.resume()
     }
     
     override func viewDidLayoutSubviews() {
@@ -123,26 +164,7 @@ class ProfileViewController: UIViewController {
         
     }
     
-
-}
-
-extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return profileOptions.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
-        cell.textLabel?.text = profileOptions[indexPath.row]
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
+    private func didTapLogout() {
         let actionSheet = UIAlertController(title: "Log Out", message: "Are you sure you want to log out?", preferredStyle: .actionSheet)
         
         actionSheet.addAction(UIAlertAction(
@@ -163,11 +185,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                                     GIDSignIn.sharedInstance()?.signOut()
                                     
                                     // UserDefaults set to nil when logged out
-//                                    UserDefaults.standard.set(nil, forKey: "email")
-//                                    UserDefaults.standard.set(nil, forKey: "profile_picture_url")
-//
-//                                    print(UserDefaults.standard.value(forKey: "email") ?? "Email not set")
-//                                    print(UserDefaults.standard.value(forKey: "profile_picture_url")  ?? "Profile pic not set")
+                                    //                                    UserDefaults.standard.set(nil, forKey: "email")
+                                    //                                    UserDefaults.standard.set(nil, forKey: "profile_picture_url")
+                                    //
+                                    //                                    print(UserDefaults.standard.value(forKey: "email") ?? "Email not set")
+                                    //                                    print(UserDefaults.standard.value(forKey: "profile_picture_url")  ?? "Profile pic not set")
                                     
                                     //TODO: Log out the user and send them back to WelcomeViewController
                                     do {
@@ -183,9 +205,33 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                                 }))
         
         present(actionSheet, animated: true, completion: nil)
-        
+    }
+
+}
+
+extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return profileOptions.count
     }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let viewModel = profileOptions[indexPath.row]
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier, for: indexPath) as! ProfileTableViewCell
+        
+//        cell.textLabel?.text = profileOptions[indexPath.row].title
+        cell.setUp(withModel: viewModel)
+        
+        return cell
+    }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        profileOptions[indexPath.row].handler?()
+        
+        
+    }
     
 }

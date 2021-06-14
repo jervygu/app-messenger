@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseDatabase
 import MessageKit
+import CoreLocation
 
 final class DatabaseManager {
     static let shared = DatabaseManager()
@@ -411,11 +412,11 @@ extension DatabaseManager {
                     let media = Media(url: imageUrl,
                                       image: nil,
                                       placeholderImage: placeholder,
-                                      size: CGSize(width: 300, height: 300))
+                                      size: CGSize(width: 250, height: 200))
                     
                     kind = .photo(media)
                 } else if type == "video" {
-                    // photo
+                    // video
                     guard let videoUrl = URL(string: content),
                           let placeholder = UIImage(named: "video_placeholder") else {
                         return nil
@@ -424,9 +425,24 @@ extension DatabaseManager {
                     let media = Media(url: videoUrl,
                                       image: nil,
                                       placeholderImage: placeholder,
-                                      size: CGSize(width: 300, height: 300))
+                                      size: CGSize(width: 250, height: 200))
                     
                     kind = .video(media)
+                } else if type == "location" {
+                    // location
+                    let locationComponents = content.components(separatedBy: ",")
+                    guard let longitude = Double(locationComponents[0]),
+                          let latitude = Double(locationComponents[1]) else {
+                        return nil
+                    }
+                    
+                    let location = Location(
+                        location: CLLocation(
+                            latitude: latitude,
+                            longitude: longitude),
+                        size: CGSize(width: 250, height: 200))
+                    
+                    kind = .location(location)
                 } else {
                     kind = .text(content)
                     
@@ -435,7 +451,7 @@ extension DatabaseManager {
                 guard let finalKind = kind else {
                     return nil
                 }
-                    
+                
                 let senderType = Sender(photoDataString: "", senderId: senderEmail, displayName: recipient_name)
                 
                 let messagesObject = Message(sender: senderType,
@@ -492,7 +508,9 @@ extension DatabaseManager {
                     message = targetUrlString
                 }
                 break
-            case .location(_):
+            case .location(let locationData):
+                let location = locationData.location
+                message = "\(location.coordinate.longitude),\(location.coordinate.latitude)"
                 break
             case .emoji(_):
                 break
@@ -776,5 +794,5 @@ struct MessengerUser {
     }
 }
  
-// part 13
+
 // part 14
