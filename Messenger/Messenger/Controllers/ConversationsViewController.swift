@@ -289,10 +289,6 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
     
 }
 
-// part 16
-// part 17 start
-
-
 // to fix:
 // pass image from conversation to chatviewcontroller,
 // bugs in logging in after logout - still shows the previous user conversations, profile
