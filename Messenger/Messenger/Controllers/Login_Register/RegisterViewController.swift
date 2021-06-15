@@ -289,6 +289,9 @@ class RegisterViewController: UIViewController {
             }
             
             Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
+                // Cache user data
+                UserDefaults.standard.setValue(email, forKey: "email")
+                UserDefaults.standard.setValue("\(firstName) \(lastName)", forKey: "name")
                 
                 guard authResult != nil, error == nil else {
                     print("\(String(describing: error!.localizedDescription))")
@@ -315,7 +318,7 @@ class RegisterViewController: UIViewController {
                             
                             switch result {
                             case .success(let downloadUrl):
-                                UserDefaults.standard.set(downloadUrl, forKey: "profile_picture_url")
+                                UserDefaults.standard.setValue(downloadUrl, forKey: "profile_picture_url")
                                 print("downloadUrl: - \(downloadUrl)")
                             case .failure(let error):
                                 print("Storage manager error: - \(error.localizedDescription)")

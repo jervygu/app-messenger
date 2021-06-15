@@ -24,6 +24,7 @@
 #import "FBSDKAppEventsConfigurationProtocol.h"
 #import "FBSDKAppEventsConfigurationProviding.h"
 #import "FBSDKCoreKitBasicsImport.h"
+#import "FBSDKCoreKitVersions.h"
 #import "FBSDKDataPersisting.h"
 #import "FBSDKEventLogging.h"
 #import "FBSDKInternalUtility.h"
@@ -48,6 +49,7 @@
     return _ ## PROPERTY_NAME; \
   } \
   - (void)SETTER:(TYPE *)value { \
+    [self validateConfiguration];  \
     _ ## PROPERTY_NAME = [value copy]; \
     if (ENABLE_CACHE) { \
       if (value != nil) { \
@@ -114,6 +116,7 @@ static NSString *const advertiserIDCollectionEnabledFalseWarning =
 @property (nullable, nonatomic) id<FBSDKInfoDictionaryProviding> infoDictionaryProvider;
 @property (nullable, nonatomic) id<FBSDKEventLogging> eventLogger;
 @property (nullable, nonatomic) NSNumber *advertiserTrackingStatusBacking;
+@property (nonatomic) BOOL isConfigured;
 
 FBSDKSETTINGS_PLIST_CONFIGURATION_SETTING_DECL(NSString, appID, setAppID);
 FBSDKSETTINGS_PLIST_CONFIGURATION_SETTING_DECL(NSString, appURLSchemeSuffix, setAppURLSchemeSuffix);
@@ -181,6 +184,8 @@ static dispatch_once_t sharedSettingsNonce;
   self.appEventsConfigurationProvider = provider;
   self.infoDictionaryProvider = infoDictionaryProvider;
   self.eventLogger = eventLogger;
+
+  self.isConfigured = YES;
 }
 
 + (void)      configureWithStore:(id<FBSDKDataPersisting>)store
@@ -505,6 +510,20 @@ FBSDKSETTINGS_PLIST_CONFIGURATION_SETTING_IMPL(
   return FBSDK_VERSION_STRING;
 }
 
+#pragma mark - Configuration Validation
+
+- (void)validateConfiguration
+{
+#if DEBUG
+  if (!self.isConfigured) {
+    static NSString *const reason = @"As of v9.0, you must initialize the SDK prior to calling any methods or setting any properties. "
+    "You can do this by calling `FBSDKApplicationDelegate`'s `application:didFinishLaunchingWithOptions:` method."
+    "Learn more: https://developers.facebook.com/docs/ios/getting-started";
+    @throw [NSException exceptionWithName:@"InvalidOperationException" reason:reason userInfo:nil];
+  }
+#endif
+}
+
 #pragma mark - Internal
 
 + (NSString *)userAgentSuffix
@@ -559,9 +578,13 @@ FBSDKSETTINGS_PLIST_CONFIGURATION_SETTING_IMPL(
   if (!g_dataProcessingOptions) {
     NSData *data = [self.store objectForKey:FBSDKSettingsDataProcessingOptions];
     if ([data isKindOfClass:[NSData class]]) {
-      NSDictionary<NSString *, id> *dataProcessingOptions = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-      if (dataProcessingOptions && [dataProcessingOptions isKindOfClass:[NSDictionary class]]) {
-        g_dataProcessingOptions = dataProcessingOptions;
+      if (@available(iOS 11.0, tvOS 11.0, *)) {
+        g_dataProcessingOptions = [NSKeyedUnarchiver unarchivedObjectOfClasses:[NSSet setWithArray:@[NSString.class, NSNumber.class, NSArray.class, NSDictionary.class, NSSet.class]] fromData:data error:nil];
+      } else {
+        NSDictionary<NSString *, id> *dataProcessingOptions = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if (dataProcessingOptions && [dataProcessingOptions isKindOfClass:[NSDictionary class]]) {
+          g_dataProcessingOptions = dataProcessingOptions;
+        }
       }
     }
   }
@@ -588,11 +611,6 @@ FBSDKSETTINGS_PLIST_CONFIGURATION_SETTING_IMPL(
   return NO;
 }
 
-+ (void)logWarnings
-{
-  [self.sharedSettings logWarnings];
-}
-
 - (void)logWarnings
 {
   // Log warnings for App Event Flags
@@ -605,11 +623,6 @@ FBSDKSETTINGS_PLIST_CONFIGURATION_SETTING_IMPL(
   if (!self._advertiserIDCollectionEnabled.boolValue) {
     NSLog(advertiserIDCollectionEnabledFalseWarning);
   }
-}
-
-+ (void)logIfSDKSettingsChanged
-{
-  [self.sharedSettings logIfSDKSettingsChanged];
 }
 
 - (void)logIfSDKSettingsChanged
@@ -644,7 +657,7 @@ FBSDKSETTINGS_PLIST_CONFIGURATION_SETTING_IMPL(
   }
 }
 
-+ (void)recordInstall
+- (void)recordInstall
 {
   if (![self.store objectForKey:FBSDKSettingsInstallTimestamp]) {
     [self.store setObject:[NSDate date] forKey:FBSDKSettingsInstallTimestamp];
@@ -739,6 +752,7 @@ FBSDKSETTINGS_PLIST_CONFIGURATION_SETTING_IMPL(
   g_loggingBehaviors = nil;
   g_userAgentSuffix = nil;
   g_dataProcessingOptions = nil;
+  g_defaultGraphAPIVersion = nil;
 }
 
 - (void)reset

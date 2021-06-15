@@ -158,6 +158,11 @@ class LoginViewController: UIViewController {
         GIDSignIn.sharedInstance()?.presentingViewController = self
         container.addSubview(googleSignInButton)
         
+        
+    }
+    
+    @objc func crashButtonTapped(_ sender: AnyObject) {
+        fatalError()
     }
     
     deinit {
@@ -329,6 +334,8 @@ class LoginViewController: UIViewController {
         
     }
     
+    
+    
 }
 
 extension LoginViewController: UITextFieldDelegate {
@@ -447,3 +454,7 @@ extension LoginViewController: LoginButtonDelegate {
     
     
 }
+
+
+
+//        /Users/mac/Library/Developer/Xcode/DerivedData/Messenger-ffcquztkrjieargpkkqzeabqiivj/Build/Products/Debug-iphonesimulator/Messenger.app.dSYM/Contents/Resources/DWARF/Messenger

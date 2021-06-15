@@ -178,20 +178,18 @@ class ProfileViewController: UIViewController {
                                 handler: { [weak self] (action) in
                                     guard let strongSelf = self else { return }
                                     
+                                    // UserDefaults set to nil when logged out
+                                    UserDefaults.standard.setValue(nil, forKey: "email")
+                                    UserDefaults.standard.setValue(nil, forKey: "name")
+                                    UserDefaults.standard.setValue(nil, forKey: "profile_picture_url")
+                                    
                                     // Facebook Logout
                                     FBSDKLoginKit.LoginManager().logOut()
                                     
                                     // Google signOut
                                     GIDSignIn.sharedInstance()?.signOut()
                                     
-                                    // UserDefaults set to nil when logged out
-                                    //                                    UserDefaults.standard.set(nil, forKey: "email")
-                                    //                                    UserDefaults.standard.set(nil, forKey: "profile_picture_url")
-                                    //
-                                    //                                    print(UserDefaults.standard.value(forKey: "email") ?? "Email not set")
-                                    //                                    print(UserDefaults.standard.value(forKey: "profile_picture_url")  ?? "Profile pic not set")
-                                    
-                                    //TODO: Log out the user and send them back to WelcomeViewController
+                                    // TODO: Log out the user and send them back to WelcomeViewController
                                     do {
                                         try Auth.auth().signOut()
                                         let vc = LoginViewController()

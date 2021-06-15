@@ -11,9 +11,12 @@ target 'Messenger' do
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
+  
+  pod 'Firebase/Crashlytics'
 
   # Add the Firebase pod for Google Analytics
-  # pod 'Firebase/Analytics'
+  pod 'Firebase/Analytics'
+  
   
   pod 'FBSDKLoginKit'
   

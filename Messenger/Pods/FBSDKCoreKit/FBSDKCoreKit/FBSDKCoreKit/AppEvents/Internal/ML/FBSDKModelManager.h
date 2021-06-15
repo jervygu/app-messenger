@@ -31,12 +31,10 @@ NS_SWIFT_NAME(ModelManager)
 
 + (instancetype)shared;
 + (void)enable;
-+ (nullable NSDictionary *)getRulesForKey:(NSString *)useCase;
 + (nullable NSData *)getWeightsForKey:(NSString *)useCase;
 + (nullable NSArray *)getThresholdsForKey:(NSString *)useCase;
 
-+ (BOOL)processIntegrity:(nullable NSString *)param;
-
+- (BOOL)processIntegrity:(nullable NSString *)param;
 - (NSString *)processSuggestedEvents:(NSString *)textFeature denseData:(nullable float *)denseData;
 - (void)enable;
 
