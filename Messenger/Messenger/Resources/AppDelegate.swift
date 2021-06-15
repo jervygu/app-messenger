@@ -61,6 +61,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+// MARK: - EXTENSION GIDSignInDelegate
+
 extension AppDelegate: GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         guard error == nil else {

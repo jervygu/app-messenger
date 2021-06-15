@@ -9,7 +9,7 @@ import UIKit
 import Firebase
 import JGProgressHUD
 
-class RegisterViewController: UIViewController {
+final class RegisterViewController: UIViewController {
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -408,7 +408,7 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
             return
         }
         
-        self.imageView.image = selectedImage
+        imageView.image = selectedImage
             
     }
     

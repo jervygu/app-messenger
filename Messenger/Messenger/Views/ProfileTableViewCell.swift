@@ -83,22 +83,22 @@ class ProfileTableViewCell: UITableViewCell {
         
         switch viewModel.viewModelType {
         case .logout:
-            self.textLabel?.textColor = .label
-            self.textLabel?.textAlignment = .left
-            self.icon.image = UIImage(systemName: viewModel.iconName)
-            self.iconContainer.backgroundColor = viewModel.color
+            textLabel?.textColor = .label
+            textLabel?.textAlignment = .left
+            icon.image = UIImage(systemName: viewModel.iconName)
+            iconContainer.backgroundColor = viewModel.color
         case .legalPolicies:
-            self.textLabel?.textColor = .label
-            self.textLabel?.textAlignment = .left
-            self.accessoryType = .disclosureIndicator
-            self.icon.image = UIImage(systemName: viewModel.iconName)
-            self.iconContainer.backgroundColor = viewModel.color
+            textLabel?.textColor = .label
+            textLabel?.textAlignment = .left
+            accessoryType = .disclosureIndicator
+            icon.image = UIImage(systemName: viewModel.iconName)
+            iconContainer.backgroundColor = viewModel.color
         case .help:
-            self.textLabel?.textColor = .systemRed
-            self.textLabel?.textAlignment = .left
-            self.accessoryType = .disclosureIndicator
-            self.icon.image = UIImage(systemName: viewModel.iconName)
-            self.iconContainer.backgroundColor = viewModel.color
+            textLabel?.textColor = .systemRed
+            textLabel?.textAlignment = .left
+            accessoryType = .disclosureIndicator
+            icon.image = UIImage(systemName: viewModel.iconName)
+            iconContainer.backgroundColor = viewModel.color
         }
     }
 }

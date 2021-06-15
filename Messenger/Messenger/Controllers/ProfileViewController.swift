@@ -10,20 +10,7 @@ import Firebase
 import FBSDKLoginKit
 import GoogleSignIn
 
-enum ProfileViewModelType {
-    case logout, legalPolicies, help
-}
-
-struct ProfileViewModel {
-    let viewModelType: ProfileViewModelType
-    let title: String
-    let iconName: String
-    let color: UIColor
-//    let color: UIColor
-    let handler: (() -> Void)?
-}
-
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -33,7 +20,6 @@ class ProfileViewController: UIViewController {
 //        return table
 //    }()
     
-//    "Account settings", "Legal and policies"
     var profileOptions = [ProfileViewModel]()
     
 
@@ -108,7 +94,7 @@ class ProfileViewController: UIViewController {
         let headerView = UIView(
             frame: CGRect(x: 0,
                           y: 0,
-                          width: self.view.width,
+                          width: view.width,
                           height: 200))
         headerView.backgroundColor = .systemGray5
         

@@ -9,7 +9,8 @@ import UIKit
 import Firebase
 import JGProgressHUD
 
-class ConversationsViewController: UIViewController {
+/// Controller that shows list of conversations
+final class ConversationsViewController: UIViewController {
     
     private let spinner = JGProgressHUD(style: .dark)
     
@@ -267,10 +268,14 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
             
             tableView.beginUpdates()
             
-            DatabaseManager.shared.deleteConversation(withConversationID: conversationID, completon: { [weak self] success in
-                if success {
-                    self?.conversations.remove(at: indexPath.row)
-                    tableView.deleteRows(at: [indexPath], with: .left)
+            self.conversations.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .left)
+            
+            DatabaseManager.shared.deleteConversation(withConversationID: conversationID, completon: { success in
+                if !success {
+                    print("Failed to deleted conversation!")
+                    // add model back and show error alert
+                    
                 }
             })
             tableView.endUpdates()
@@ -289,4 +294,6 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
 
 
 // to fix:
-// pass image from conversation to chatviewcontroller, 
+// pass image from conversation to chatviewcontroller,
+// bugs in logging in after logout - still shows the previous user conversations, profile
+
