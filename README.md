@@ -35,7 +35,7 @@ A Beginners swift project, a realtime chat app in Swift 5 using Firebase
 
 | Login | Facebook Login | Google Sign in | Registration | 
 | --- | --- | --- | --- | 
-|![Login](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20a_iphone12black_portrait.png=250x100) | ![Facebook Login](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20c_iphone12black_portrait.png=250x100) | ![Google Sign in](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20c2_iphone12black_portrait.png=250x100) | ![Registration](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20b_iphone12black_portrait.png=250x100) |
+|![Login](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20a_iphone12black_portrait.png){ width=25% }  | ![Facebook Login](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20c_iphone12black_portrait.png) { width=25% } | ![Google Sign in](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20c2_iphone12black_portrait.png) { width=25% } | ![Registration](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20b_iphone12black_portrait.png) { width=25% } |
 
 | Preview in Mac |
 | --- |
