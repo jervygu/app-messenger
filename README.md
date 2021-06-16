@@ -52,4 +52,4 @@ A Beginners swift project, a realtime chat app in Swift 5 using Firebase
 
 | Darkmode |   
 | --- | 
-| ![Profile](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20q_darkmode_iphone12black_portrait.png) |
+| <img src="https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20q_darkmode_iphone12black_portrait.png" alt="Darkmode On" width="200"/> |
