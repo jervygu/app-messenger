@@ -35,10 +35,10 @@ A Beginners swift project, a realtime chat app in Swift 5 using Firebase
 
 | Login | Facebook Login | Google Sign in | Registration | 
 | --- | --- | --- | --- | 
-|![Login](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20a_iphone12black_portrait.png) | ![Facebook Login](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20c_iphone12black_portrait.png) | ![Google Sign in](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20c2_iphone12black_portrait.png) | ![Registration](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20b_iphone12black_portrait.png) |
+| ![Login](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20a_iphone12black_portrait.png) | ![Facebook Login](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20c_iphone12black_portrait.png) | ![Google Sign in](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20c2_iphone12black_portrait.png) | ![Registration](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20b_iphone12black_portrait.png) |
 
-| Preview in Mac |
-| --- |
-| ![Preview in Mac](https://github.com/jervygu/app-dahaker-news/blob/master/screenshots/Screen%20Shot%202021-06-16%20at%2012.00.24%20PM_macbookpro13_front.png) |
+| Home | Chat | Attach Media | Photo Message |  
+| --- | --- | --- | --- | 
+| ![Home](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20d_iphone12black_portrait.png) | ![Chat](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20e_iphone12black_portrait.png) | ![Attach Media](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20f2_iphone12black_portrait.png) | ![Photo Message](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20g_iphone12black_portrait.png) |
 
-// https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20a_iphone12black_portrait.png
+
