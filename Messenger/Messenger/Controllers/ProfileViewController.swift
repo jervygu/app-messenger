@@ -37,7 +37,7 @@ final class ProfileViewController: UIViewController {
                              iconName: "questionmark.circle.fill",
                              color: UIColor.systemBlue,
                              handler: { [weak self] in
-                                self?.goToWebPage(urlString: "https://www.facebook.com/terms.php",
+                                self?.goToWebPage(urlString: "https://www.facebook.com/help",
                                             title: "Help Center")
                              }))
         
