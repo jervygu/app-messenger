@@ -45,4 +45,11 @@ A Beginners swift project, a realtime chat app in Swift 5 using Firebase
 | --- | --- | --- | --- | 
 | ![Video](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20h_iphone12black_portrait.png) | ![Location](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20i_iphone12black_portrait.png) | ![Search](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20j_iphone12black_portrait.png) | ![Delete](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20k_iphone12black_portrait.png) |
 
+| Profile | Help Center | Legal & Policies | Log out |  
+| --- | --- | --- | --- | 
+| ![Profile](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20l_iphone12black_portrait.png) | ![Help](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20m_iphone12black_portrait.png) | ![Legal](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20o_iphone12black_portrait.png) | ![Logout](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20p_iphone12black_portrait.png) |
 
+
+| Darkmode |   
+| --- | 
+| ![Profile](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20q_darkmode_iphone12black_portrait.png) |
