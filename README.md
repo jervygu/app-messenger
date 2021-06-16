@@ -32,6 +32,8 @@ A Beginners swift project, a realtime chat app in Swift 5 using Firebase
 - JGProgressHUD
 - SDWebImage
 
+## Screenshots
+
 
 | Login | Facebook Login | Google Sign in | Registration | 
 | --- | --- | --- | --- | 
