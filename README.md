@@ -33,7 +33,7 @@ A Beginners swift project, a realtime chat app in Swift 5 using Firebase
 - SDWebImage
 
 
-| Login | Facebook Login | Google Sign in | Registration | 
+| Login | Login | Sign in | Login | 
 | --- | --- | --- | --- | 
 |![Login](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20a_iphone12black_portrait.png) | ![Facebook Login](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20c_iphone12black_portrait.png) | ![Google Sign in](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20c2_iphone12black_portrait.png) | ![Registration](https://github.com/jervygu/app-messenger/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%20b_iphone12black_portrait.png) |
 
