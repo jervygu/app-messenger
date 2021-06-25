@@ -18,7 +18,7 @@ target 'Messenger' do
   pod 'Firebase/Analytics'
   
   # Add for clould messaging. push notification
-  pod 'Firebase/Messaging'
+  #  pod 'Firebase/Messaging'
   
   
   pod 'FBSDKLoginKit'
