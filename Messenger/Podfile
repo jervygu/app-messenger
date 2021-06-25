@@ -17,6 +17,9 @@ target 'Messenger' do
   # Add the Firebase pod for Google Analytics
   pod 'Firebase/Analytics'
   
+  # Add for clould messaging. push notification
+  pod 'Firebase/Messaging'
+  
   
   pod 'FBSDKLoginKit'
   
